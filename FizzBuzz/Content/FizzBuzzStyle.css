@@ -1,0 +1,11 @@
+﻿.Fizz, .Wizz {
+     color: blue;
+        user-select:none
+}   
+.Buzz, .Wuzz {
+    color:Green;
+        user-select:none
+}
+ul {
+    list-style-type:none;
+}

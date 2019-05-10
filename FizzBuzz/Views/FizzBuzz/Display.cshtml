@@ -1,0 +1,39 @@
+﻿@model FizzBuzz.Models.FizzBuzzModel
+@using PagedList
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Display";
+}
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+@using (Html.BeginForm("Display", "FizzBuzz", FormMethod.Post))
+{
+    @Html.Label("Enter Number")
+    @Html.TextBoxFor(m => m.Number)
+    <input type="submit" value="Submit" />
+    @Html.ValidationMessageFor(m => m.Number)
+
+    if (Model.FizzBuzzValue != null)
+    {
+        <ul>
+            @for (var item = 0; item < Model.FizzBuzzValue.Count; item++)
+            {
+                <li>@foreach (var value in Model.FizzBuzzValue[item].Split(' '))
+                    {
+                    <span class="@value">@value</span>
+                    }
+                </li>
+            }          
+        </ul>
+        <div class="pagedList">
+                @Html.PagedListPager(Model.FizzBuzzValue, page => Url.Action("LoadBasedOnPageIndex", new {Model.Number, page}), PagedListRenderOptions.TwitterBootstrapPager)
+        </div>
+    }
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+
